@@ -35,7 +35,9 @@ get '/action' do
     
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
     
-    Pony.mail( :subject => 'quote2note in use', :body => @midifile )
+    usereport = Time.now.to_s+'\n'+@midifile+'\n'+request.ip+'\n'+request.user_agent+'\n'+request.referrer
+    $stderr.puts "q2n: route /action use report:"+"\n"+usereport
+    Pony.mail( :subject => 'quote2note in use', :body => usereport )
     
     if @midifile.include? "ERROR"
         @symbolinvalid = true
@@ -47,7 +49,7 @@ get '/action' do
         system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
         @mp3file = @midifile.sub(/[^.]+\z/,"mp3")
         mp3full  = filepath + @mp3file
-        system( "lame #{wavfull} #{mp3full}" )
+        system( "lame #{wavfull} #{mp3full} --tt #{@midifile} -tl quote2note -ta Larry_Lang" )
         erb :result
     end
 end
