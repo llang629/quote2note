@@ -145,8 +145,8 @@ if live == false
         end
     end
     
-    if ENV.has_key?('Q2N_FOLDER')
-        filepath = ENV['Q2N_FOLDER']+"/"
+    if ENV.has_key?('Q2N_DIR')
+        filepath = ENV['Q2N_DIR']+"/"
         else
         filepath = ""
     end

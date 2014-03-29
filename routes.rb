@@ -28,7 +28,7 @@ get '/' do
 end
 
 get '/action' do
-    FileUtils.mkdir_p(ENV['Q2N_FOLDER'])
+    FileUtils.mkdir_p(ENV['Q2N_DIR'])
     
     @symbol = params[:symbol].upcase
     $stderr.puts "q2n: route /action with " +@symbol
@@ -54,5 +54,5 @@ end
 
 get '/sweep' do
     $stderr.puts "q2n: route /sweep"
-    FileUtils.rm_rf(Dir.glob(ENV['Q2N_FOLDER']+"/*"))
+    FileUtils.rm_rf(Dir.glob(ENV['Q2N_DIR']+"/*"))
 end

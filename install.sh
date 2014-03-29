@@ -6,7 +6,7 @@ apt-get update
 apt-get upgrade
 
 # folder for .mid .wav .mp3 files
-echo "export Q2N_FOLDER=./public" >>.profile
+echo "export Q2N_DIR=./public" >>.profile
 . .profile
 
 
