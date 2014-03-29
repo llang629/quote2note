@@ -34,7 +34,7 @@ sudo apt-get -y install apt-transport-https ca-certificates
 
 echo Phusion Passenger repository configuring for Ubuntu 12.04
 FILE="/etc/apt/sources.list.d/passenger.list"
-sudo cat <<EOM >$FILE
+sudo bash -c "cat <<EOM >$FILE
 ##### !!!! Only add ONE of these lines, not all of them !!!! #####
 # Ubuntu 13.10
 # deb https://oss-binaries.phusionpassenger.com/apt/passenger saucy main
@@ -46,7 +46,7 @@ deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main
 # deb https://oss-binaries.phusionpassenger.com/apt/passenger wheezy main
 # Debian 6
 # deb https://oss-binaries.phusionpassenger.com/apt/passenger squeeze main
-EOM
+EOM"
 
 sudo chown root: /etc/apt/sources.list.d/passenger.list
 sudo chmod 600 /etc/apt/sources.list.d/passenger.list
