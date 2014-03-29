@@ -1,0 +1,22 @@
+<p>
+This website translates stock quotes into musical notes. 
+<ul>
+<li>
+Higher closing price translates to higher pitch. 
+<li>
+Greater trading volume translates to increased velocity (loudness).
+<li>
+Upward trend translates to harmony, downward to dissonance.
+</ul>
+Enjoy!
+
+<% if @symbolinvalid == true %>
+<p>
+<font color="red">
+<%= @midifile %>
+</font>
+<br>
+<A HREF="http://www.marketwatch.com/tools/quotes/lookup.asp" target="_blank">
+Look up stock symbols
+</A>
+<% end %>
