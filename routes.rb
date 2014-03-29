@@ -34,7 +34,7 @@ get '/action' do
     @wavfile  = @midifile.sub(/[^.]+\z/,"wav")
     wavGood   = system( "fluidsynth -F ./public/wav/#{@wavfile} /usr/share/sounds/sf2/FluidR3_GM.sf2 ./public/mid/#{@midifile}" )
     @mp3file  = @midifile.sub(/[^.]+\z/,"mp3")
-    mp3Good   = system( "lame ./public/wav/#{@wavfile} ./public/mid/#{@mp3file}" )
+    mp3Good   = system( "lame ./public/wav/#{@wavfile} ./public/mp3/#{@mp3file}" )
     #Pony.mail :subject => 'quote2note in use', :body => @midifile
     
     if @midifile.include? "ERROR"
