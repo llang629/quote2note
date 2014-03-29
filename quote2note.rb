@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 
-#dir = File.dirname(File.expand_path(__FILE__))
-#$LOAD_PATH.unshift dir + '/../lib'
-
 ### parse command line options
 
 require 'trollop'
@@ -106,6 +103,14 @@ if live == false
     require 'midilib/io/seqwriter'
     include MIDI
     
+    if ENV.has_key?('Q2N_DIR')
+        filepath = ENV['Q2N_DIR']+"/"
+        else
+        filepath = ""
+    end
+    filename = symbol+"-"+dates.last+".mid"
+    filefull = filepath + filename
+    
     seq = Sequence.new()
     
     # Special first track holds tempo and other meta events
@@ -113,14 +118,14 @@ if live == false
     seq.tracks << track
     microduration = (noteduration*1000000).round #note duration in microseconds
     track.events << Tempo.new(microduration) #tempo by (quarter) note duration
-    track.events << MetaEvent.new(META_SEQ_NAME, 'Sequence Name')
+    track.events << MetaEvent.new(META_SEQ_NAME, 'Quote2Note')
     
     # Create a track to hold the notes. Add it to the sequence.
     track = Track.new(seq)
     seq.tracks << track
     
     # Give the track a name and an instrument name (optional).
-    track.name = 'My New Track'
+    track.name = filename
     track.instrument = GM_PATCH_NAMES[0]
     
     # Add a volume controller event (optional).
@@ -138,21 +143,14 @@ if live == false
         track.events << NoteOn.new(0, notes[i] , vels[i], 0)
         track.events << NoteOn.new(0, harmonies[i] , vels[i], 0)
         track.events << NoteOff.new(0, notes[i] , vels[i], quarter_note_length)
-        track.events << NoteOff.new(0, harmonies[i] , vels[i], quarter_note_length)
+        track.events << NoteOff.new(0, harmonies[i] , vels[i], 0)
         #signal passing time periods
         if pulses[i] == 1
             track.events << NoteOn.new(9, 51, 64, 0)
         end
     end
     
-    if ENV.has_key?('Q2N_DIR')
-        filepath = ENV['Q2N_DIR']+"/"
-        else
-        filepath = ""
-    end
-    filename = symbol+"-"+dates.last+".mid"
-    fullfile = filepath + filename    
-    File.open(fullfile, 'wb') { |file| seq.write(file) }
+    File.open(filefull, 'wb') { |file| seq.write(file) }
     puts filename
     
 end
