@@ -16,8 +16,6 @@ $stderr.puts "q2n: routes.rb starting"
 #Pony.options = { :to => 'q2n@larrylang.net', :from => 'noreply@larrylang.net' }
 #Pony.mail :subject => 'quote2note starting', :body => Time.now.to_s
 
-$stderr.puts "past Pony"
-
 get '/' do
     $stderr.puts "q2n: route /"
     @symbolinvalid = false
@@ -33,7 +31,7 @@ get '/action' do
     $stderr.puts "q2n: route /action with " +@symbol
     
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
-    Pony.mail :subject => 'quote2note in use', :body => @midifile
+    #Pony.mail :subject => 'quote2note in use', :body => @midifile
     
     if @midifile.include? "ERROR"
         @symbolinvalid = true
