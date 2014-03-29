@@ -44,7 +44,7 @@ get '/action' do
         erb :main
         else
         midifull = filepath + @midifile
-        basename = @midifile.sub(/[^.]+\z/,"")
+        basename = @midifile.sub(/\.\w$/,'')
         @wavfile = basename+".wav"
         wavfull  = filepath + @wavfile
         system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
