@@ -5,8 +5,10 @@
 apt-get update
 apt-get upgrade
 
-# folder for .mid .wav .mp3 files
-echo "export Q2N_DIR=./public" >>.profile
+# directory for application .mid .wav .mp3 files
+echo export Q2N_DIR=./public >>.profile
+# fix for Passenger security warning
+echo export rvmsudo_secure_path=0 >>.profile
 . .profile
 
 
@@ -61,6 +63,4 @@ cd quote2note
 git clone https://github.com/llang629/quote2note.git
 
 # start application
-rvmsudo passenger start --port 80 --user=ubuntu
-
-
+screen rvmsudo passenger start --port 80 --user=ubuntu

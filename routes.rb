@@ -19,7 +19,8 @@ $stderr.puts "q2n: sndfnt="+sndfnt
 # email via /usr/sbin/sendmail
 require 'pony'
 Pony.options = { :to => 'q2n@larrylang.net', :from => 'noreply@larrylang.net' }
-#Pony.mail :subject => 'quote2note starting', :body => Time.now.to_s
+return_pony = Pony.mail :subject => 'quote2note starting', :body => Time.now.to_s
+$stderr.puts return_pony
 
 get '/' do
     $stderr.puts "q2n: route /"
@@ -35,7 +36,8 @@ get '/action' do
     
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
     
-    #Pony.mail :subject => 'quote2note in use', :body => @midifile
+    return_pony = Pony.mail :subject => 'quote2note in use', :body => @midifile
+    $stderr.puts return_pony
     
     if @midifile.include? "ERROR"
         @symbolinvalid = true
@@ -44,10 +46,10 @@ get '/action' do
         midifull = filepath + @midifile
         @wavfile = @midifile.sub(/[^.]+\z/,"wav")
         wavfull  = filepath + @wavfile
-        wav_ret  = system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
+        return_fluid  = system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
         @mp3file = @midifile.sub(/[^.]+\z/,"mp3")
         mp3full  = filepath + @mp3file
-        mp3_ret  = system( "lame #{wavfull} #{mp3full}" )
+        return_lame  = system( "lame #{wavfull} #{mp3full}" )
         erb :result
     end
 end
