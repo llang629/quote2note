@@ -33,6 +33,7 @@ get '/action' do
     @symbol = params[:symbol].upcase
     $stderr.puts "q2n: route /action with " +@symbol
     
+    $stderr.puts "q2n: soundfontX="+@soundfont
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
     
     #Pony.mail :subject => 'quote2note in use', :body => @midifile
@@ -44,7 +45,7 @@ get '/action' do
         @midifull = filepath + @midifile
         @wavfile  = @midifile.sub(/[^.]+\z/,"wav")
         @wavfull  = filepath + @wavfile
-        $stderr.puts @soundfont
+        $stderr.puts "q2n: soundfontY="+@soundfont
         wav_com = "fluidsynth -F #{@wavfull} #{@soundfont} #{@midifull}"
         $stderr.puts wav_com
         wav_ret   = system( wav_com )
