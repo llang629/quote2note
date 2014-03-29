@@ -7,7 +7,14 @@
 <b>Success! </b>
 Translated <%= @symbol %> stock quotes into musical notes.
 <p>
-Click to listen:
+<object width="300" height="42">
+<param name="src" value="<%= @mp3file %>">
+<param name="autoplay" value=“true”>
+<param name="controller" value="true">
+<param name="bgcolor" value="#FFFFFF">
+<embed src="<%= @mp3file %>" autostart=“true” loop="false" width="300" height="42" controller="true" bgcolor="#FFFFFF">
+</object>
+Click to download:
 <ul>
 <li>
 <A HREF="<%= @mp3file %>">MP3 file</A>
