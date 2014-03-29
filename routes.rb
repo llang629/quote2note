@@ -13,7 +13,7 @@ if ENV.has_key?('Q2N_DIR')
 end
 $stderr.puts "q2n: filepath="+filepath
 
-@soundfont = /usr/share/sounds/sf2/FluidR3_GM.sf2
+@soundfont = "/usr/share/sounds/sf2/FluidR3_GM.sf2"
 $stderr.puts "q2n: soundfount="+@soundfont
 
 # email via /usr/sbin/sendmail
@@ -41,12 +41,15 @@ get '/action' do
         @symbolinvalid = true
         erb :main
         else
-        @midifull  = filepath + @midifile
+        @midifull = filepath + @midifile
         @wavfile  = @midifile.sub(/[^.]+\z/,"wav")
-        @wavfull   = filepath + @wavfile
-        wav_ret   = system( "fluidsynth -F #{@wavfull} #{@soundfont} #{@midifull}" )
+        @wavfull  = filepath + @wavfile
+        wav_com = "fluidsynth -F #{@wavfull} #{@soundfont} #{@midifull}"
+        $stderr.puts wav_com
+        wav_ret   = system( wav_com )
+        #wav_ret   = system( "fluidsynth -F #{@wavfull} #{@soundfont} #{@midifull}" )
         @mp3file  = @midifile.sub(/[^.]+\z/,"mp3")
-        @mp3full   = filepath + @mp3file
+        @mp3full  = filepath + @mp3file
         mp3_ret   = system( "lame #{@wavfull} #{@mp3full}" )
         erb :result
     end
