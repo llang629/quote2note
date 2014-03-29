@@ -14,7 +14,7 @@ end
 $stderr.puts "q2n: filepath="+filepath
 
 @soundfont = "/usr/share/sounds/sf2/FluidR3_GM.sf2"
-$stderr.puts "q2n: soundfount="+@soundfont
+$stderr.puts "q2n: soundfont="+@soundfont
 
 # email via /usr/sbin/sendmail
 require 'pony'
@@ -44,6 +44,7 @@ get '/action' do
         @midifull = filepath + @midifile
         @wavfile  = @midifile.sub(/[^.]+\z/,"wav")
         @wavfull  = filepath + @wavfile
+        $stderr.puts @soundfont
         wav_com = "fluidsynth -F #{@wavfull} #{@soundfont} #{@midifull}"
         $stderr.puts wav_com
         wav_ret   = system( wav_com )
