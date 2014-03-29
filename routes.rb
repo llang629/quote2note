@@ -11,9 +11,9 @@ if ENV.has_key?('Q2N_DIR')
     else
     filepath = ""
 end
-$stderr.puts "q2n: filepath= "+filepath
+$stderr.puts "q2n: filepath="+filepath
 
-@soundfont = "/usr/share/sounds/sf2/FluidR3_GM.sf2"
+@soundfont = /usr/share/sounds/sf2/FluidR3_GM.sf2
 $stderr.puts "q2n: soundfount="+@soundfont
 
 # email via /usr/sbin/sendmail
