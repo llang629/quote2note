@@ -38,10 +38,10 @@ get '/action' do
     midifull  = filepath + @midifull
     @wavfile  = @midifile.sub(/[^.]+\z/,"wav")
     wavfull   = filepath + @wavfile
-    wav_ret   = system( fluidsynth -F wavfull /usr/share/sounds/sf2/FluidR3_GM.sf2 midifull )
+    wav_ret   = system( "fluidsynth -F wavfull /usr/share/sounds/sf2/FluidR3_GM.sf2 midifull" )
     @mp3file  = @midifile.sub(/[^.]+\z/,"mp3")
     mp3full   = filepath + @mp3file
-    mp3_ret   = system( lame wavfull mp3full )
+    mp3_ret   = system( "lame wavfull mp3full" )
     #Pony.mail :subject => 'quote2note in use', :body => @midifile
     
     if @midifile.include? "ERROR"
