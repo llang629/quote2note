@@ -18,10 +18,21 @@ echo export rvmsudo_secure_path=0 >>.profile
 sudo apt-get -y install sendmail-bin
 
 
-# install ruby version manager and ruby
-# see ‘rvm list remote’ for current binaries
-\curl -L https://get.rvm.io | bash -s stable --ruby=ruby-2.0.0-p353
-source /home/ubuntu/.rvm/scripts/rvm
+# install Ruby Version Manager and Ruby
+\curl -L https://get.rvm.io | bash -s stable
+
+# Load RVM into a shell session *as a function*
+if [[ -s "$HOME/.rvm/scripts/rvm" ]] ; then
+# First try to load from a user install
+source "$HOME/.rvm/scripts/rvm"
+elif [[ -s "/usr/local/rvm/scripts/rvm" ]] ; then
+# Then try to load from a root install
+source "/usr/local/rvm/scripts/rvm"
+else
+printf "ERROR: An RVM installation was not found.\n"
+fi
+
+rvm install 2.0
 gem install rack rake sinatra  --no-document
 gem install daemon_controller  --no-document #required by passenger
 gem install pony trollop midilib unimidi --no-document #required by application
