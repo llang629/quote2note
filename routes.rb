@@ -35,7 +35,7 @@ get '/action' do
     
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
     
-    usereport = Time.now.to_s+'\n'+@midifile+'\n'+request.ip+'\n'+request.user_agent+'\n'+request.referrer
+    usereport = Time.now.to_s+"\n"+@midifile+"\n"+request.ip+"\n"+request.user_agent+"\n"+request.referrer
     $stderr.puts "q2n: route /action use report:"+"\n"+usereport
     Pony.mail( :subject => 'quote2note in use', :body => usereport )
     
