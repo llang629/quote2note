@@ -7,13 +7,12 @@
 <b>Success! </b>
 Translated <%= @symbol %> stock quotes into musical notes.
 <p>
-<object width="300" height="42">
-<param name="src" value="<%= @mp3file %>">
-<param name="autoplay" value=“true”>
-<param name="controller" value="true">
-<param name="bgcolor" value="#FFFFFF">
-<embed src="<%= @mp3file %>" autostart=“true” loop="false" width="300" height="42" controller="true" bgcolor="#FFFFFF">
-</object>
+<audio controls>
+  <source src="<%= @mp3file %>" type="audio/mpeg">
+  <source src="<%= @wavfile %>" type="audio/wav”>
+  Your browser does not support the available audio formats.
+</audio>
+<p>
 Click to download:
 <ul>
 <li>
