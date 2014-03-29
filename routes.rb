@@ -55,7 +55,7 @@ get '/action' do
     end
 end
 
-get '/sweep' do
-    $stderr.puts "q2n: route /sweep"
+get '/clear' do
+    $stderr.puts "q2n: route /clear"
     FileUtils.rm_rf(Dir.glob(ENV['Q2N_DIR']+"/*"))
 end
