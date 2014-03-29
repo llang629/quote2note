@@ -12,6 +12,10 @@ echo export rvmsudo_secure_path=0 >>.profile
 . .profile
 
 
+# install sendmail to support Pony.mail
+sudo apt-get install sendmail-bin
+
+
 # install ruby version manager and ruby
 # see ‘rvm list remote’ for current binaries
 \curl -L https://get.rvm.io | bash -s stable --ruby=ruby-2.0.0-p353
