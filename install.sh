@@ -21,6 +21,7 @@ sudo apt-get -y install sendmail-bin
 # install ruby version manager and ruby
 # see ‘rvm list remote’ for current binaries
 \curl -L https://get.rvm.io | bash -s stable --ruby=ruby-2.0.0-p353
+source /home/ubuntu/.rvm/scripts/rvm
 gem install rack rake sinatra  --no-document
 gem install daemon_controller  --no-document #required by passenger
 gem install pony trollop midilib unimidi --no-document #required by application
