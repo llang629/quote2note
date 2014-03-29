@@ -1,6 +1,8 @@
 #!/bin/bash 
 # install for AWS Ubuntu 12.04
-# run 'sudo bash install.sh'
+# retrieve and run using these commands…
+# wget https://raw.githubusercontent.com/llang629/quote2note/master/install.sh
+# sudo bash install.sh
 
 apt-get update
 apt-get upgrade
