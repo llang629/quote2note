@@ -33,7 +33,6 @@ get '/action' do
     @symbol = params[:symbol].upcase
     $stderr.puts "q2n: route /action with " +@symbol
     
-    $stderr.puts "q2n: sndfntX="+sndfnt
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
     
     #Pony.mail :subject => 'quote2note in use', :body => @midifile
@@ -42,17 +41,13 @@ get '/action' do
         @symbolinvalid = true
         erb :main
         else
-        @midifull = filepath + @midifile
-        @wavfile  = @midifile.sub(/[^.]+\z/,"wav")
-        @wavfull  = filepath + @wavfile
-        $stderr.puts "q2n: sndfntY="+sndfnt
-        wav_com = "fluidsynth -F #{@wavfull} #{sndfnt} #{@midifull}"
-        $stderr.puts wav_com
-        wav_ret   = system( wav_com )
-        #wav_ret   = system( "fluidsynth -F #{@wavfull} #{sndfnt} #{@midifull}" )
-        @mp3file  = @midifile.sub(/[^.]+\z/,"mp3")
-        @mp3full  = filepath + @mp3file
-        mp3_ret   = system( "lame #{@wavfull} #{@mp3full}" )
+        midifull = filepath + @midifile
+        @wavfile = @midifile.sub(/[^.]+\z/,"wav")
+        wavfull  = filepath + @wavfile
+        wav_ret  = system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
+        @mp3file = @midifile.sub(/[^.]+\z/,"mp3")
+        mp3full  = filepath + @mp3file
+        mp3_ret  = system( "lame #{wavfull} #{mp3full}" )
         erb :result
     end
 end
