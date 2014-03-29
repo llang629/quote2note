@@ -44,10 +44,10 @@ get '/action' do
         midifull = filepath + @midifile
         @wavfile = @midifile.sub(/[^.]+\z/,"wav")
         wavfull  = filepath + @wavfile
-        return_fluid  = system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
+        system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
         @mp3file = @midifile.sub(/[^.]+\z/,"mp3")
         mp3full  = filepath + @mp3file
-        return_lame  = system( "lame #{wavfull} #{mp3full}" )
+        system( "lame #{wavfull} #{mp3full}" )
         erb :result
     end
 end
