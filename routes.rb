@@ -1,11 +1,11 @@
 require 'sinatra'
 require 'erb'
 
-# AWS Elastic Beantstalk with Sinatra logs to /var/app/support/passenger.log
-require 'logger'
-$stdout.sync = true
-$stderr.sync = true
-$stderr.puts "q2n: routes.rb starting"
+#require 'logger'
+#$stdout.sync = true
+#$stderr.sync = true
+#$stderr.puts "q2n: routes.rb starting"
+
 #FileUtils.mkdir_p('log')
 #log = File.new("log/q2n.log", "a+")
 #$stdout.reopen(log)
