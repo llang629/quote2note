@@ -7,15 +7,12 @@
 <b>Success! </b>
 Translated <%= @symbol %> stock quotes into musical notes.
 <p>
-<audio controls autoplay draggable>
-  <source src="<%= @mp3file %>" type="audio/mpeg">
-  <source src="<%= @wavfile %>" type="audio/wav”>
-  Your browser does not support the available audio formats.
+<audio id="audioplayer" preload="metadata" controls autoplay style="width:100%;" >
+<source src="<%= @mp3file %>" type="audio/mp3">
+<source src="<%= @wavfile %>" type="audio/wav">
+Your browser doesn't support the HTML audio tag.
 </audio>
-<p>
-Where does this go?
-<br>
-Is it really hiding?
+
 <p>
 Click to download:
 <ul>
