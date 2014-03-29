@@ -1,5 +1,6 @@
+#!/bin/bash 
+# install for AWS Ubuntu 12.04
 # run 'sudo bash install.sh'
-# recipe for AWS Ubuntu 12.04
 
 apt-get update
 apt-get upgrade
