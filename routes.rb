@@ -35,7 +35,7 @@ get '/action' do
     $stderr.puts "q2n: route /action with " +@symbol
     
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
-    midifull  = filepath + @midifull
+    midifull  = filepath + @midifile
     @wavfile  = @midifile.sub(/[^.]+\z/,"wav")
     wavfull   = filepath + @wavfile
     wav_ret   = system( "fluidsynth -F wavfull /usr/share/sounds/sf2/FluidR3_GM.sf2 midifull" )
