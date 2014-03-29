@@ -19,7 +19,7 @@ $stderr.puts "q2n: sndfnt="+sndfnt
 # email via /usr/sbin/sendmail
 require 'pony'
 Pony.options = { :to => 'q2n@larrylang.net', :from => 'noreply@larrylang.net' }
-return_pony = Pony.mail :subject => 'quote2note starting', :body => Time.now.to_s
+return_pony = Pony.mail( :subject => 'quote2note starting', :body => Time.now.to_s )
 $stderr.puts return_pony
 
 get '/' do
@@ -36,7 +36,7 @@ get '/action' do
     
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
     
-    return_pony = Pony.mail :subject => 'quote2note in use', :body => @midifile
+    return_pony = Pony.mail( :subject => 'quote2note in use', :body => @midifile )
     $stderr.puts return_pony
     
     if @midifile.include? "ERROR"
