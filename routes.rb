@@ -49,7 +49,7 @@ get '/action' do
         system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
         @mp3file = @midifile.sub(/[^.]+\z/,"mp3")
         mp3full  = filepath + @mp3file
-        system( "lame #{wavfull} #{mp3full} --tt #{@midifile} --tl Quote2Note --ta Larry\x20Lang" )
+        system( "lame -V5 #{wavfull} #{mp3full} --tt #{@midifile} --tl Quote2Note --ta 'Larry Lang'" )
         erb :result
     end
 end
