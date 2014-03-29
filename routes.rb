@@ -46,4 +46,4 @@ end
 get '/sweep' do
     $stderr.puts "q2n: route /sweep"
     FileUtils.rm_rf(Dir.glob(ENV['Q2N_FOLDER']+"/*"))
- nd
+end

@@ -52,6 +52,7 @@ sudo apt-get install lame
 
 # install git
 sudo apt-get install git
+git config --global push.default simple
 
 # install application
 mkdir quote2note
