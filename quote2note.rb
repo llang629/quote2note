@@ -8,7 +8,7 @@ $LOAD_PATH.unshift dir + '/../lib'
 require 'trollop'
 
 opts = Trollop::options do
-    version "quote2note 0.1 (c) 2014 Larry Lang"
+    version "quote2note 1.0 (c) 2014 Larry Lang"
     banner <<-EOS
     quote2note converts stock quotes to MIDI music.
     Price maps to pitch, trend to harmony, and volume to loudness.
@@ -72,7 +72,7 @@ class Array
 end
 
 notes = acloses.midify(0,120)
-vels  = volumes.midify(42,127)
+vels  = volumes.midify(80,127)
 
 #harmonies according to gaining or losing stock price trend
 harmonies = Array.new(count)
@@ -145,8 +145,8 @@ if live == false
         end
     end
     
-    if ENV.has_key?('Q2N_MIDI_FOLDER')
-        filepath = ENV['Q2N_MIDI_FOLDER']+"/"
+    if ENV.has_key?('Q2N_FOLDER')
+        filepath = ENV['Q2N_FOLDER']+"/"
         else
         filepath = ""
     end
