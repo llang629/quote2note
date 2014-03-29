@@ -4,6 +4,10 @@
 apt-get update
 apt-get upgrade
 
+# folder for .mid .wav .mp3 files
+echo "export Q2N_FOLDER=./public" >>.profile
+. .profile
+
 
 # install ruby version manager and ruby
 # see ‘rvm list remote’ for current binaries
@@ -40,15 +44,18 @@ sudo apt-get update
 sudo apt-get install passenger
 
 
-# install fluidsynth for .mid to .wav and lame for .wav to .mp3
 # see http://wootangent.net/2010/11/converting-midi-to-wav-or-mp3-the-easy-way/
+# install fluidsynth for .mid to .wav
 sudo apt-get install fluidsynth fluid-soundfont-gm
+# install lame for .wav to .mp3
 sudo apt-get install lame
 
 # install git
 sudo apt-get install git
 
 # install application
+mkdir quote2note
+cd quote2note
 git clone https://github.com/llang629/quote2note.git
 
 # start application

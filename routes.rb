@@ -30,9 +30,9 @@ get '/action' do
     
     @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
     @wavfile  = @midifile.sub(/[^.]+\z/,"wav")
-    wavGood   = system( "fluidsynth -F ENV['Q2N_FOLDER']/#{@wavfile} /usr/share/sounds/sf2/FluidR3_GM.sf2 ENV['Q2N_FOLDER']/#{@midifile}" )
+    wav_ret   = system( "fluidsynth -F ENV['Q2N_FOLDER']/#{@wavfile} /usr/share/sounds/sf2/FluidR3_GM.sf2 ENV['Q2N_FOLDER']/#{@midifile}" )
     @mp3file  = @midifile.sub(/[^.]+\z/,"mp3")
-    mp3Good   = system( "lame ENV['Q2N_FOLDER']/#{@wavfile} ENV['Q2N_FOLDER']/#{@mp3file}" )
+    mp3_ret   = system( "lame ENV['Q2N_FOLDER']/#{@wavfile} ENV['Q2N_FOLDER']/#{@mp3file}" )
     #Pony.mail :subject => 'quote2note in use', :body => @midifile
     
     if @midifile.include? "ERROR"
@@ -45,5 +45,5 @@ end
 
 get '/sweep' do
     $stderr.puts "q2n: route /sweep"
-    FileUtils.rm_rf(Dir.glob(ENV['Q2N_FOLDER']/*))
+    FileUtils.rm_rf(Dir.glob(ENV['Q2N_FOLDER']+"/*"))
  nd
