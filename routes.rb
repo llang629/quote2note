@@ -1,10 +1,10 @@
 require 'sinatra'
 require 'erb'
 
-#require 'logger'
-#$stdout.sync = true
-#$stderr.sync = true
-#$stderr.puts "q2n: routes.rb starting"
+require 'logger'
+$stdout.sync = true
+$stderr.sync = true
+$stderr.puts "q2n: routes.rb starting"
 
 #FileUtils.mkdir_p('log')
 #log = File.new("log/q2n.log", "a+")
@@ -12,10 +12,11 @@ require 'erb'
 #$stderr.reopen(log)
 
 # email via /usr/sbin/sendmail
-require 'pony'
-Pony.options = { :to => 'q2n@larrylang.net', :from => 'noreply@larrylang.net' }
-Pony.mail :subject => 'quote2note starting', :body => Time.now.to_s
+#require 'pony'
+#Pony.options = { :to => 'q2n@larrylang.net', :from => 'noreply@larrylang.net' }
+#Pony.mail :subject => 'quote2note starting', :body => Time.now.to_s
 
+$stderr.puts "past Pony"
 
 get '/' do
     $stderr.puts "q2n: route /"

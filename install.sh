@@ -10,6 +10,7 @@ apt-get upgrade
 \curl -L https://get.rvm.io | bash -s stable --ruby=ruby-2.0.0-p353
 gem install rack rake sinatra  --no-document
 gem install daemon_controller  --no-document #required by passenger
+gem install pony trollop midilib unimidi --no-document #required by application
 
 
 # install Phusion Passenger
@@ -33,7 +34,6 @@ deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main
 # deb https://oss-binaries.phusionpassenger.com/apt/passenger squeeze main
 EOM
 
-
 sudo chown root: /etc/apt/sources.list.d/passenger.list
 sudo chmod 600 /etc/apt/sources.list.d/passenger.list
 sudo apt-get update
@@ -50,9 +50,6 @@ sudo apt-get install git
 
 # install application
 git clone https://github.com/llang629/quote2note.git
-
-# install application gems
-gem install pony trollop midilib unimidi --no-document
 
 # start application
 rvmsudo passenger start --port 80 --user=ubuntu
