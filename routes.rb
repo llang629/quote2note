@@ -48,6 +48,7 @@ get '/action' do
         @wavfile = basename+".wav"
         wavfull  = filepath + @wavfile
         unless File.exist?( wavefull )
+            $stderr.puts "Make it fresh"
             system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
         end
         @mp3file = basename+".mp3"
