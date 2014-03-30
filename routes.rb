@@ -47,16 +47,16 @@ get '/action' do
         basename = File.basename(@midifile, '.*')
         @wavfile = basename+".wav"
         wavfull  = filepath + @wavfile
-        unless File.exist?( wavefull )
-            $stderr.puts "Make wav fresh"
+        unless File.exist?( wavfull )
+            $stderr.puts "q2n: fresh wav"
+            system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
         end
-        system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
         @mp3file = basename+".mp3"
         mp3full  = filepath + @mp3file
         unless File.exist?( mp3full )
-            $stderr.puts "Make mp3 fresh"
+            $stderr.puts "q2n: fresh mp3"
+            system( "lame -V5 #{wavfull} #{mp3full} --tt #{basename} --tl Quote2Note --ta 'Larry Lang'" )
         end
-        system( "lame -V5 #{wavfull} #{mp3full} --tt #{basename} --tl Quote2Note --ta 'Larry Lang'" )
         erb :result
     end
 end
