@@ -47,14 +47,14 @@ get '/action' do
         basename = File.basename(@midifile, '.*')
         @wavfile = basename+".wav"
         wavfull  = filepath + @wavfile
-        if File.exist?( wavefull ) == false
+        unless File.exist?( wavefull )
             system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
-            end
+        end
         @mp3file = basename+".mp3"
         mp3full  = filepath + @mp3file
-        if File.exist?( mp3full ) == false
+        unless File.exist?( mp3full )
             system( "lame -V5 #{wavfull} #{mp3full} --tt #{basename} --tl Quote2Note --ta 'Larry Lang'" )
-            end
+        end
         erb :result
     end
 end
