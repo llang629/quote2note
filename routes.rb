@@ -21,8 +21,8 @@ require 'pony'
 Pony.options = { :to => 'q2n@larrylang.net', :from => 'noreply@larrylang.net' }
 Pony.mail( :subject => 'quote2note starting', :body => Time.now.to_s )
 
-get '/' do
-    $stderr.puts "q2n: route /"
+get '/main' do
+    $stderr.puts "q2n: route /main"
     @symbolinvalid = false
     erb :main
 end
@@ -69,11 +69,15 @@ end
 
 get '/show' do
     $stderr.puts "q2n: route /show"
-    %x[ "ls " + Dir.glob(ENV['Q2N_DIR']) ]
-    
+    %x[ ls #{Dir.glob(ENV['Q2N_DIR']).first} ]
 end
 
 get '/clear' do
     $stderr.puts "q2n: route /clear"
     FileUtils.rm_rf(Dir.glob(ENV['Q2N_DIR']+"/*"))
+end
+
+get '/*' do
+    $stderr.puts "q2n: route other " + request.url
+    redirect to('/main')
 end
