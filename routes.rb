@@ -69,7 +69,7 @@ end
 
 get '/show' do
     $stderr.puts "q2n: route /show"
-    %x[ ls #{Dir.glob(ENV['Q2N_DIR']).first} ]
+    %x[ ls -l  #{Dir.glob(ENV['Q2N_DIR']).first} ].tr("\n","<br>")
 end
 
 get '/clear' do
