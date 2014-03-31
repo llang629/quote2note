@@ -69,7 +69,7 @@ end
 
 get '/show' do
     $stderr.puts "q2n: route /show"
-    %x[ ls -l  #{Dir.glob(ENV['Q2N_DIR']).first} ].tr("\n","<br>")
+    %x[ ls -l  #{Dir.glob(ENV['Q2N_DIR']).first} ].gsub(/\r?\n/, '<br>')
 end
 
 get '/clear' do
