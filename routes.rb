@@ -69,12 +69,12 @@ end
 
 get '/show' do
     $stderr.puts "q2n: route /show"
-    %x[ ls -l  #{Dir.glob(ENV['Q2N_DIR']).first} ].insert(0, "<pre>")
+    %x[ ls -l  #{Dir.glob(ENV['Q2N_DIR']).first} ].insert(0, "<pre>") #<pre> preserves output format
 end
 
 get '/clear' do
     $stderr.puts "q2n: route /clear"
-    FileUtils.rm_rf(Dir.glob(ENV['Q2N_DIR']+"/*"))
+    FileUtils.rm_rf(Dir.glob(ENV['Q2N_DIR']+"/*")).insert(0, "<pre>") #<pre> preserves output format
 end
 
 get '/*' do
