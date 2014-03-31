@@ -29,7 +29,7 @@ end
 
 get '/action' do
     FileUtils.mkdir_p(ENV['Q2N_DIR'])
- 
+    
     @symbol = params[:symbol].upcase
  
     if @symbol.to_s.empty?
@@ -37,8 +37,7 @@ get '/action' do
         redirect back
         else
         
-        $stderr.puts "q2n: route /action with " +@symbol
-        
+        $stderr.puts "q2n: route /action with " +@symbol        
         @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
         
         report = Time.now.to_s+"\n"+@midifile+"\nClient IP: "+request.ip+"\nClient Browser: "+request.user_agent
