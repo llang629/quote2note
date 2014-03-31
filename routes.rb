@@ -31,13 +31,13 @@ get '/action' do
     FileUtils.mkdir_p(ENV['Q2N_DIR'])
     
     @symbol = params[:symbol].upcase
- 
+    
     if @symbol.to_s.empty?
         $stderr.puts "q2n: symbol empty"
         redirect back
         else
         
-        $stderr.puts "q2n: route /action with " +@symbol        
+        $stderr.puts "q2n: route /action with " +@symbol
         @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
         
         report = Time.now.to_s+"\n"+@midifile+"\nClient IP: "+request.ip+"\nClient Browser: "+request.user_agent
@@ -60,11 +60,17 @@ get '/action' do
             mp3full  = filepath + @mp3file
             unless File.exist?( mp3full )
                 $stderr.puts "q2n: fresh mp3"
-                system( "lame -V5 #{wavfull} #{mp3full} --tt #{basename} --tl Quote2Note --ta 'Larry Lang'" )
+                system( "lame -V5 #{wavfull} #{mp3full} --tt #{basename} --tl Quote2Note --ta 'Larry Lag'" )
             end
             erb :result
         end
     end
+end
+
+get '/show' do
+    $stderr.puts "q2n: route /show"
+    %x[ "ls " + Dir.glob(ENV['Q2N_DIR']) ]
+    
 end
 
 get '/clear' do
