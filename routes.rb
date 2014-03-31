@@ -30,6 +30,11 @@ end
 get '/action' do
     FileUtils.mkdir_p(ENV['Q2N_DIR'])
     
+    if @symbol.empty?
+        redirect back
+        $stderr.puts "q2n: symbol empty"
+    end
+    
     @symbol = params[:symbol].upcase
     $stderr.puts "q2n: route /action with " +@symbol
     
