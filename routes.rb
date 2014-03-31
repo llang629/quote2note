@@ -31,38 +31,39 @@ get '/action' do
     FileUtils.mkdir_p(ENV['Q2N_DIR'])
     
     if @symbol.empty?
-        redirect back
         $stderr.puts "q2n: symbol empty"
-    end
-    
-    @symbol = params[:symbol].upcase
-    $stderr.puts "q2n: route /action with " +@symbol
-    
-    @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
-    
-    report = Time.now.to_s+"\n"+@midifile+"\nClient IP: "+request.ip+"\nClient Browser: "+request.user_agent
-    $stderr.puts "q2n: route /action report:"+"\n"+report
-    Pony.mail( :subject => 'quote2note in use', :body => report )
-    
-    if @midifile.include? "ERROR"
-        @symbolinvalid = true
-        erb :main
+        redirect back
         else
-        midifull = filepath + @midifile
-        basename = File.basename(@midifile, '.*')
-        @wavfile = basename+".wav"
-        wavfull  = filepath + @wavfile
-        unless File.exist?( wavfull )
-            $stderr.puts "q2n: fresh wav"
-            system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
+        
+        @symbol = params[:symbol].upcase
+        $stderr.puts "q2n: route /action with " +@symbol
+        
+        @midifile = %x[ruby quote2note.rb --symbol #{@symbol}].delete("\n")
+        
+        report = Time.now.to_s+"\n"+@midifile+"\nClient IP: "+request.ip+"\nClient Browser: "+request.user_agent
+        $stderr.puts "q2n: route /action report:"+"\n"+report
+        Pony.mail( :subject => 'quote2note in use', :body => report )
+        
+        if @midifile.include? "ERROR"
+            @symbolinvalid = true
+            erb :main
+            else
+            midifull = filepath + @midifile
+            basename = File.basename(@midifile, '.*')
+            @wavfile = basename+".wav"
+            wavfull  = filepath + @wavfile
+            unless File.exist?( wavfull )
+                $stderr.puts "q2n: fresh wav"
+                system( "fluidsynth -F #{wavfull} #{sndfnt} #{midifull}" )
+            end
+            @mp3file = basename+".mp3"
+            mp3full  = filepath + @mp3file
+            unless File.exist?( mp3full )
+                $stderr.puts "q2n: fresh mp3"
+                system( "lame -V5 #{wavfull} #{mp3full} --tt #{basename} --tl Quote2Note --ta 'Larry Lang'" )
+            end
+            erb :result
         end
-        @mp3file = basename+".mp3"
-        mp3full  = filepath + @mp3file
-        unless File.exist?( mp3full )
-            $stderr.puts "q2n: fresh mp3"
-            system( "lame -V5 #{wavfull} #{mp3full} --tt #{basename} --tl Quote2Note --ta 'Larry Lang'" )
-        end
-        erb :result
     end
 end
 
