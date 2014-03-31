@@ -30,7 +30,7 @@ end
 get '/action' do
     FileUtils.mkdir_p(ENV['Q2N_DIR'])
     
-    if @symbol.empty?
+    if @symbol.to_s.empty?
         $stderr.puts "q2n: symbol empty"
         redirect back
         else
