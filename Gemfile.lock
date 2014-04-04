@@ -1,0 +1,46 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    alsa-rawmidi (0.2.14)
+      ffi (>= 1.0)
+    ffi (1.9.3)
+    ffi-coremidi (0.2.0)
+      ffi (>= 1.0)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    midi-jruby (0.0.12)
+    midi-winmm (0.1.10)
+      ffi (>= 1.0)
+    midilib (2.0.4)
+    mime-types (1.25.1)
+    polyglot (0.3.4)
+    pony (1.8)
+      mail (>= 2.0)
+    rack (1.5.2)
+    rack-protection (1.5.2)
+      rack
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
+    trollop (2.0)
+    unimidi (0.3.5)
+      alsa-rawmidi (~> 0)
+      ffi-coremidi (~> 0)
+      midi-jruby (~> 0)
+      midi-winmm (~> 0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  midilib
+  pony
+  sinatra
+  trollop
+  unimidi

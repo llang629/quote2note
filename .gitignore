@@ -1,3 +1,6 @@
+log/
+public/
+
 *.gem
 *.rbc
 .bundle
