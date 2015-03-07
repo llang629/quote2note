@@ -104,6 +104,7 @@ mkdir log
 # allow New Relic write priveleges (and change ownership if necessary)
 sudo chmod 777 log
 # sudo chown root:root log
+# edit config/newrelic.yml to insert New Relic license key
 
 
 # start application
