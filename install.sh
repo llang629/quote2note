@@ -12,10 +12,13 @@ echo export Q2N_DIR=./public/cache >>.profile
 # fix for Passenger security warning
 echo export rvmsudo_secure_path=0 >>.profile
 . .profile
+# only effective during this script run
+# after terminating Passenger web server, either logout/login or repeat ". .profile"
 
 
 # install sendmail to support Pony.mail
 sudo apt-get -y install sendmail-bin
+
 
 # RVM 1.26.0 introduced signed releases and automated check of signatures when GPG software found.
 # import the Michal Papis mpapis public key, verify with https://rvm.io/mpapis.asc or https://keybase.io/mpapis
@@ -37,10 +40,16 @@ else
 printf "ERROR: An RVM installation was not found.\n"
 fi
 
+# install ruby
 rvm install 2.0
+
+# install gems
 gem install rack rake sinatra  --no-document
 gem install daemon_controller  --no-document #required by passenger
 gem install pony trollop midilib unimidi --no-document #required by application
+# updates may require
+# gem update
+# and bundle install
 
 
 # install Phusion Passenger
@@ -76,12 +85,25 @@ sudo apt-get -y install fluidsynth fluid-soundfont-gm
 # install lame for .wav to .mp3
 sudo apt-get -y install lame
 
+
 # install git
 sudo apt-get -y install git
+
 
 # install application
 git clone https://github.com/llang629/quote2note.git
 cd quote2note
+
+
+# directory for locks from Passenger
+mkdir tmp
+mkdir pids
+
+# directory for logs from Passenger, New Relic (requires chown and chmod), and clearcache.sh
+mkdir log
+sudo chown root:root log
+sudo chmod 777 log
+
 
 # start application
 screen rvmsudo -E passenger start --port 80 --user=ubuntu

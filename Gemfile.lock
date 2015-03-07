@@ -13,6 +13,7 @@ GEM
       ffi (>= 1.0)
     midilib (2.0.4)
     mime-types (2.4.3)
+    newrelic_rpm (3.10.0.279)
     pony (1.11)
       mail (>= 2.0)
     rack (1.6.0)
@@ -35,6 +36,7 @@ PLATFORMS
 
 DEPENDENCIES
   midilib
+  newrelic_rpm
   pony
   sinatra
   trollop
