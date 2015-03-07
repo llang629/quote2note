@@ -8,7 +8,7 @@ sudo apt-get -y update
 sudo apt-get -y upgrade
 
 # directory for application .mid .wav .mp3 files
-echo export Q2N_DIR=./public >>.profile
+echo export Q2N_DIR=./public/cache >>.profile
 # fix for Passenger security warning
 echo export rvmsudo_secure_path=0 >>.profile
 . .profile

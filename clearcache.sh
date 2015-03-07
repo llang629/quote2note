@@ -1,7 +1,7 @@
 #!/bin/bash 
 # install as cron job
 
-# quote2note caches files in public directory
+# quote2note writes files in public cache directory
 LOG_DIR="/home/ubuntu/quote2note/log"
 sudo chmod go+w $LOG_DIR
 LOG="$LOG_DIR/clearcache.log"
