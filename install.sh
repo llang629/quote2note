@@ -84,4 +84,4 @@ git clone https://github.com/llang629/quote2note.git
 cd quote2note
 
 # start application
-screen rvmsudo passenger start --port 80 --user=ubuntu
+screen rvmsudo -E passenger start --port 80 --user=ubuntu

@@ -3,13 +3,22 @@
 <!--https://code.google.com/p/yahoo-finance-managed/wiki/miscapiImageDownload--> 
 <img src="http://chart.finance.yahoo.com/z?s=<%= @symbol %>&t=my&q=l&l=off&z=l&p=v"/>
 
+<%
+# determines path (if any) within public folder
+if ENV.has_key?('Q2N_DIR')
+    @publicsubpath = ENV['Q2N_DIR']+"/"
+    @publicsubpath.slice!("./public/")
+    else
+    @publicsubpath  = ""
+end
+%>
 <p>
 <b>Success! </b>
 Translated <%= @symbol %> stock quotes into musical notes.
 <p>
 <audio id="audioplayer" preload="metadata" controls autoplay style="width:100%;" >
-<source src="<%= @mp3file %>" type="audio/mp3">
-<source src="<%= @wavfile %>" type="audio/wav">
+<source src="<%= @publicsubpath %><%= @mp3file %>" type="audio/mp3">
+<source src="<%= @publicsubpath %><%= @wavfile %>" type="audio/wav">
 Your browser doesn't support the HTML audio tag.
 </audio>
 
@@ -17,9 +26,9 @@ Your browser doesn't support the HTML audio tag.
 Click to download:
 <ul>
 <li>
-<A HREF="<%= @mp3file %>">MP3 file</A>
+<A HREF="<%= @publicsubpath %><%= @mp3file %>">MP3 file</A>
 <li>
-<A HREF="<%= @wavfile %>">WAV file</A>
+<A HREF="<%= @publicsubpath %><%= @wavfile %>">WAV file</A>
 <li>
-<A HREF="<%= @midifile %>">MIDI file</A>
+<A HREF="<%= @publicsubpath %><%= @midifile %>">MIDI file</A>
 </ul>
