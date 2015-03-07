@@ -99,10 +99,11 @@ cd quote2note
 mkdir tmp
 mkdir pids
 
-# directory for logs from Passenger, New Relic (requires chown and chmod), and clearcache.sh
+# directory for logs from Passenger, New Relic, and clearcache.sh
 mkdir log
-sudo chown root:root log
+# allow New Relic write priveleges (and change ownership if necessary)
 sudo chmod 777 log
+# sudo chown root:root log
 
 
 # start application
