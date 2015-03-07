@@ -1,5 +1,5 @@
 #!/bin/bash 
-# install for AWS Ubuntu 12.04
+# install for AWS Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-44-generic x86_64)
 # retrieve and run using these commands…
 # wget https://raw.githubusercontent.com/llang629/quote2note/master/install.sh
 # bash install.sh
@@ -17,6 +17,11 @@ echo export rvmsudo_secure_path=0 >>.profile
 # install sendmail to support Pony.mail
 sudo apt-get -y install sendmail-bin
 
+# RVM 1.26.0 introduced signed releases and automated check of signatures when GPG software found.
+# import the Michal Papis mpapis public key, verify with https://rvm.io/mpapis.asc or https://keybase.io/mpapis
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+# if that fails, try
+# command curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 
 # install Ruby Version Manager and Ruby
 \curl -L https://get.rvm.io | bash -s stable
