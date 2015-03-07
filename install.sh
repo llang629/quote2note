@@ -52,10 +52,10 @@ echo Phusion Passenger repository configuring for Ubuntu 12.04
 FILE="/etc/apt/sources.list.d/passenger.list"
 sudo bash -c "cat <<EOM >$FILE
 ##### !!!! Only add ONE of these lines, not all of them !!!! #####
-# Ubuntu 13.10
-# deb https://oss-binaries.phusionpassenger.com/apt/passenger saucy main
+# Ubuntu 14.04
+deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main
 # Ubuntu 12.04
-deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main
+# deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main
 # Ubuntu 10.04
 # deb https://oss-binaries.phusionpassenger.com/apt/passenger lucid main
 # Debian 7
