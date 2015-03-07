@@ -7,3 +7,5 @@ gem 'trollop'
 gem 'midilib'
 gem 'unimidi'
 
+gem ‘newrelic_rpm’
+
