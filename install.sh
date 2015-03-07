@@ -45,11 +45,9 @@ rvm install 2.0
 
 # install gems
 gem install rack rake sinatra  --no-document
-gem install daemon_controller  --no-document #required by passenger
+gem install daemon_controller  --no-document #required by Passenger
+gem install newrelic_rpm  --no-document #required by New Relic
 gem install pony trollop midilib unimidi --no-document #required by application
-# updates may require
-# gem update
-# and bundle install
 
 
 # install Phusion Passenger
@@ -94,10 +92,13 @@ sudo apt-get -y install git
 git clone https://github.com/llang629/quote2note.git
 cd quote2note
 
+# prepare required ruby gems
+bundle install
+
 
 # directory for locks from Passenger
 mkdir tmp
-mkdir pids
+mkdir tmp/pids
 
 # directory for logs from Passenger, New Relic, and clearcache.sh
 mkdir log
