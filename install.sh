@@ -12,10 +12,10 @@ sudo apt-get -y upgrade
 echo export Q2N_DIR=./public/cache >>.profile
 # fix for Passenger security warning
 echo export rvmsudo_secure_path=0 >>.profile
-. .profile
 # alias to quick-start application
 echo "alias qs='cd $HOME/quote2note; \
 screen rvmsudo -E passenger start --port 80 --user=ubuntu'" >>.profile
+. .profile
 # only effective during this script run
 # after terminating Passenger web server, either logout/login or repeat ". .profile"
 
@@ -52,6 +52,8 @@ gem install rack rake sinatra  --no-document
 gem install daemon_controller  --no-document #required by Passenger
 gem install newrelic_rpm  --no-document #required by New Relic
 gem install pony trollop midilib unimidi --no-document #required by application
+# bundle install
+# may be required for updated gems
 
 
 # install Phusion Passenger
@@ -96,15 +98,12 @@ sudo apt-get -y install git
 git clone https://github.com/llang629/quote2note.git
 cd quote2note
 
-# prepare required ruby gems
-# bundle install
 
-
-# directory for locks from Passenger
+# directory for Passenger locks
 mkdir tmp
 mkdir tmp/pids
 
-# directory for logs from Passenger, New Relic, and clearcache.sh
+# directory for logs
 mkdir log
 # allow New Relic write priveleges
 sudo chmod 777 log
