@@ -97,7 +97,7 @@ git clone https://github.com/llang629/quote2note.git
 cd quote2note
 
 # prepare required ruby gems
-bundle install
+# bundle install
 
 
 # directory for locks from Passenger
