@@ -1,10 +1,8 @@
-s file configures the New Relic Agent.  New Relic monitors Ruby, Java,
+# file configures the New Relic Agent.  New Relic monitors Ruby, Java,
 # .NET, PHP, Python and Node applications with deep visibility and low
 # overhead.  For more information, visit www.newrelic.com.
 #
 # From configuration file generated February 27, 2015
-# This configuration file is custom generated for NA_1239
-# Edited March 6, 2015 by llang for Gencore license_key
 
 
 # Here are the settings that are common to all environments

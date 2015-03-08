@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 # install for AWS Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-44-generic x86_64)
 # retrieve and run using these commands…
 # wget https://raw.githubusercontent.com/llang629/quote2note/master/install.sh
@@ -7,6 +7,9 @@
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
+# alias to quick-start application
+alias qs="cd $HOME/quote2note; \
+screen rvmsudo -E passenger start --port 80 --user=ubuntu"
 # directory for application .mid .wav .mp3 files
 echo export Q2N_DIR=./public/cache >>.profile
 # fix for Passenger security warning
@@ -102,10 +105,9 @@ mkdir tmp/pids
 
 # directory for logs from Passenger, New Relic, and clearcache.sh
 mkdir log
-# allow New Relic write priveleges (and change ownership if necessary)
+# allow New Relic write priveleges
 sudo chmod 777 log
-# sudo chown root:root log
-# edit config/newrelic.yml to insert New Relic license key
+printf "\nOPTIONAL: Edit config/newrelic.yml to insert New Relic license key.\n\n"
 
 
 # start application
