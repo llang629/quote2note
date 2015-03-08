@@ -7,14 +7,15 @@
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
-# alias to quick-start application
-alias qs="cd $HOME/quote2note; \
-screen rvmsudo -E passenger start --port 80 --user=ubuntu"
+
 # directory for application .mid .wav .mp3 files
 echo export Q2N_DIR=./public/cache >>.profile
 # fix for Passenger security warning
 echo export rvmsudo_secure_path=0 >>.profile
 . .profile
+# alias to quick-start application
+echo "alias qs='cd $HOME/quote2note; \
+screen rvmsudo -E passenger start --port 80 --user=ubuntu'" >>.profile
 # only effective during this script run
 # after terminating Passenger web server, either logout/login or repeat ". .profile"
 
@@ -107,7 +108,7 @@ mkdir tmp/pids
 mkdir log
 # allow New Relic write priveleges
 sudo chmod 777 log
-printf "\nOPTIONAL: Edit config/newrelic.yml to insert New Relic license key.\n\n"
+printf "OPTIONAL: Edit config/newrelic.yml to insert New Relic license key.\n"
 
 
 # start application
