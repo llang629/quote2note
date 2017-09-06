@@ -67,6 +67,7 @@ noteduration = duration/count
 class Array
     #define user Array method to scale from data to MIDI values, default 0 to 127
     def midify(midimin=0, midimax=127)
+        $stderr.puts "Midimin: #{midimin}, Midimax: #{midimax}"
         midispan = midimax - midimin
         max = self.map(&:to_f).max
         min = self.map(&:to_f).min
@@ -75,7 +76,9 @@ class Array
     end
 end
 
+$stderr.puts "Midify quotes to notes"
 notes = qprices.midify(24,84)  # previous range from 0 to 120 too extreme
+$stderr.puts "Midify volumes to velocities"
 vels  = volumes.midify(80,127)
 
 #harmonies according to gaining or losing stock price trend
