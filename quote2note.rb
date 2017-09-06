@@ -29,27 +29,34 @@ live = opts[:live]
 ### retrieve stock data from Yahoo
 
 require 'open-uri'
+require 'openssl'
 require 'csv'
 
 # validate stock symbol
-url = "http://finance.yahoo.com/d/quotes?s=" +symbol+ "&f=x"
-exchange = open(url).string
-if exchange.include? "N/A"
+# obsolete: validated stock symbol with Yahoo
+# url = "http://finance.yahoo.com/d/quotes?s=" +symbol+ "&f=x"
+# exchange = open(url).string
+url = "https://www.google.com/finance?q=" +symbol
+exchange = open(url, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}) { |io| io.read }
+if exchange.include? "produced no matches"
     puts "ERROR: Invalid stock symbol [" +symbol+ "]"
     exit
 end
 
-# convert stock symbol into Yahoo URL
-url = "http://ichart.finance.yahoo.com/table.csv?s=" + symbol
-# load stock data into into .csv array
-quotes=CSV.new(open(url))
+# convert stock symbol into URL
+# obsolete: download historical CSV for stock symbol from Yahoo
+# url = "http://ichart.finance.yahoo.com/table.csv?s=" + symbol
+url = "https://www.google.com/finance/historical?output=csv&q=" + symbol
 
-quotes.shift #delete header
-quotes = quotes.sort #oldest first
+# load stock data into into .csv array of arrays
+qload  = open(url, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}) # { |io| io.read }
+quotes = CSV.read(qload)
+quotes.shift # delete header row
+quotes = quotes.reverse # reverse so oldest to newest
 
-dates   = quotes.transpose[0]
-acloses = quotes.transpose[6] #adjusted closing prices
-volumes = quotes.transpose[5]
+dates = quotes.map {|row| row[0]}
+acloses = quotes.map {|row| row[4]}
+volumes = quotes.map {|row| row[5]}
 count   = dates.count
 
 ### map stock data to MIDI values
