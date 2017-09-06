@@ -1,7 +1,32 @@
 <p>
+
+<!--OBSOLETE Yahoo stock graph image-->
 <!--For stock chart parameters, see-->
 <!--https://code.google.com/p/yahoo-finance-managed/wiki/miscapiImageDownload--> 
 <img src="http://chart.finance.yahoo.com/z?s=<%= @symbol %>&t=my&q=l&l=off&z=l&p=v"/>
+
+<!-- TradingView Widget BEGIN -->
+<div id="tv-medium-widget-2bbac"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+new TradingView.MediumWidget({
+  "container_id": "tv-medium-widget-2bbac",
+  "symbols": [
+    [
+      "<%= @symbol %>",
+      "<%= @symbol %>"
+    ],
+  ],
+  "gridLineColor": "#e9e9ea",
+  "fontColor": "#83888D",
+  "underLineColor": "#dbeffb",
+  "trendLineColor": "#4bafe9",
+  "width": "800px",
+  "height": "400px",
+  "locale": "en"
+});
+</script>
+<!-- TradingView Widget END -->
 
 <%
 # determines path (if any) within public folder
