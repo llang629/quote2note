@@ -75,7 +75,7 @@ class Array
     end
 end
 
-notes = qprices.midify(24,96)  # previous range from 0 to 120 too extreme
+notes = qprices.midify(24,84)  # previous range from 0 to 120 too extreme
 vels  = volumes.midify(80,127)
 
 #harmonies according to gaining or losing stock price trend
