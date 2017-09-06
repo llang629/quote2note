@@ -75,7 +75,7 @@ class Array
     end
 end
 
-notes = acloses.midify(0,120)
+notes = acloses.midify(24,108)  # previous range from 0 to 120 too extreme
 vels  = volumes.midify(80,127)
 
 #harmonies according to gaining or losing stock price trend
