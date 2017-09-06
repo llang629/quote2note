@@ -55,7 +55,7 @@ quotes.shift # delete header row
 quotes = quotes.reverse # reverse so oldest to newest
 
 dates = quotes.map {|row| row[0]}
-acloses = quotes.map {|row| row[4]}
+qprices = quotes.map {|row| row[1]} # opening price, to match TradingView chart
 volumes = quotes.map {|row| row[5]}
 count   = dates.count
 
@@ -75,7 +75,7 @@ class Array
     end
 end
 
-notes = acloses.midify(24,108)  # previous range from 0 to 120 too extreme
+notes = qprices.midify(24,96)  # previous range from 0 to 120 too extreme
 vels  = volumes.midify(80,127)
 
 #harmonies according to gaining or losing stock price trend
@@ -83,7 +83,7 @@ harmonies = Array.new(count)
 harmonies.each_index do |i|
     if i == 0                          #if opening day
         harmonies[i] = notes[i]              #unison
-        elsif acloses[i] >= acloses[i-1]   #if gaininig...
+        elsif qprices[i] >= qprices[i-1]   #if gaininig...
         harmonies[i] = notes[i]+4            #major third
         else                               #if losing...
         harmonies[i] = notes[i]+6            #tritone
@@ -185,7 +185,7 @@ if live == true
     for i in 0..(count-1)
         
         #print daily stock quote
-        puts "#{symbol.upcase}  #{dates[i]}  $#{acloses[i]}  #{volumes[i]}"
+        puts "#{symbol.upcase}  #{dates[i]}  $#{qprices[i]}  #{volumes[i]}"
         
         #diagnostic
         #puts "#{notes[i]}  #{harmonies[i]}  #{vels[i]}  #{pulses[i]}"
