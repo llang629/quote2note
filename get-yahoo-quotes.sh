@@ -34,8 +34,13 @@ function log () {
 # Period values are 'Seconds since 1970-01-01 00:00:00 UTC'. Also known as Unix time or epoch time.
 # Let's just assume we want it all and ask for a date range that starts at 1/1/1970.
 # NOTE: This doesn't work for old synbols like IBM which has Yahoo has back to 1962
-START_DATE=0
+# START_DATE=0
+# END_DATE=$(date +%s)
+
+YEAR_SECS=31622400 #seconds in a year
 END_DATE=$(date +%s)
+START_DATE=`expr $END_DATE - $YEAR_SECS`
+echo $START_DATE $END_DATE
 
 # Store the cookie in a temp file
 cookieJar=$(mktemp)
@@ -50,7 +55,7 @@ function getCrumb () {
   # grep for the CrumbStore line
   # then copy out the value
   # lastly, remove any quotes
-  echo -en "$(curl -s --cookie-jar $cookieJar $1)" | Tr "}" "\n" | grep CrumbStore | cut -d':' -f 3 | sed 's+"++g'
+  echo -en "$(curl -s --cookie-jar $cookieJar $1)" | tr "}" "\n" | grep CrumbStore | cut -d':' -f 3 | sed 's+"++g'
 }
 
 # TODO If crumb is blank then we probably don't have a valid symbol
