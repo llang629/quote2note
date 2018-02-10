@@ -43,14 +43,19 @@ if exchange.include? "produced no matches"
     exit
 end
 
-# convert stock symbol into URL
-# obsolete: download historical CSV for stock symbol from Yahoo
-# url = "http://ichart.finance.yahoo.com/table.csv?s=" + symbol
-url = "https://www.google.com/finance/historical?output=csv&q=" + symbol
+#obsolete section; shifted to input via bash script
+#convert stock symbol into URL
+#obsolete: download historical CSV for stock symbol from Yahoo
+#url = "http://ichart.finance.yahoo.com/table.csv?s=" + symbol
+#obsolete: download historical CSV for stock symbol from Google
+#url = "https://www.google.com/finance/historical?output=csv&q=" + symbol
+#qload  = open(url, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}) # { |io| io.read }
+#quotes = CSV.read(qload)
 
 # load stock data into into .csv array of arrays
-qload  = open(url, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}) # { |io| io.read }
-quotes = CSV.read(qload)
+# via bash script derived from https://github.com/bradlucas/get-yahoo-quotes
+qload = %x(bash get-yahoo-quotes.sh #{symbol})
+quotes = CSV.parse(qload)
 quotes.shift # delete header row
 quotes = quotes.reverse # reverse so oldest to newest
 
