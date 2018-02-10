@@ -38,7 +38,7 @@ require 'csv'
 # exchange = open(url).string
 url = "https://www.google.com/finance?q=" +symbol
 exchange = open(url, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}) { |io| io.read }
-if exchange.include? "produced no matches"
+if exchange.include? "did not match any finance results"
     puts "ERROR: Invalid stock symbol [" +symbol+ "]"
     exit
 end
