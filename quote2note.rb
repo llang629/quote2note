@@ -57,7 +57,9 @@ end
 qload = %x(bash get-yahoo-quotes.sh #{symbol})
 quotes = CSV.parse(qload)
 quotes.shift # delete header row
-quotes = quotes.reverse # reverse so oldest to newest
+
+# if needed, reverse so oldest to newest; otherwise comment out
+# quotes = quotes.reverse
 
 dates = quotes.map {|row| row[0]}
 qprices = quotes.map {|row| row[1]} # opening price, to match TradingView chart
