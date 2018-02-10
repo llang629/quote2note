@@ -40,7 +40,6 @@ function log () {
 YEAR_SECS=31622400 #seconds in a year
 END_DATE=$(date +%s)
 START_DATE=`expr $END_DATE - $YEAR_SECS`
-echo $START_DATE $END_DATE
 
 # Store the cookie in a temp file
 cookieJar=$(mktemp)
