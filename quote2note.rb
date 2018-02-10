@@ -63,7 +63,7 @@ quotes.shift # delete header row
 
 dates = quotes.map {|row| row[0]}
 qprices = quotes.map {|row| row[1]} # opening price, to match TradingView chart
-volumes = quotes.map {|row| row[5]}
+volumes = quotes.map {|row| row[6]}
 count   = dates.count
 
 ### map stock data to MIDI values
