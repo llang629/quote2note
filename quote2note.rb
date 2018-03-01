@@ -15,7 +15,7 @@ opts = Trollop::options do
     where [options] are:
     EOS
     opt :symbol, "Stock symbol", :type => String
-    opt :duration, "Music duration", :default => 45.0
+    opt :duration, "Music duration", :default => 36.5
     opt :live, "Direct to synthesizer, otherwise to default MIDI file SYMBOL-DATE.mid"
     opt :midifile, "Alternate MIDI file name", :type => String
 end
